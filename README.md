@@ -1,5 +1,5 @@
-# transformer_project
- A starter template to get going with a hugging face transformer project.
+# transformer_project_pytorch
+ A starter template to get going with a hugging face transformer project with pytorch.
 
 ## Start Here: Environment Setup
 * Create a conda environment from yml of base environment
