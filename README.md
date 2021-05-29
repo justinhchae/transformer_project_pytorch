@@ -7,7 +7,8 @@
   # replace transformer_project with your project name
   conda env create -n transformer_project --file=environment.yml
   ```
-
+## Get Going Here: Hugging Face Examples/Resources:
+* [https://github.com/huggingface/transformers](https://github.com/huggingface/transformers)
 ## Environment and Preliminaries from Scratch
 * Conda Set Channel Strict conda-forge. Do this from base env prior to creating envs.
   ```bash
