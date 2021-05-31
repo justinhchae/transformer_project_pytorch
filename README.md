@@ -1,23 +1,25 @@
 # transformer_project_pytorch
  A starter template to get going with a hugging face transformer project with pytorch.
 
-## Start Here: Environment Setup
+## Environment Setup with Conda ENV
 * Create a conda environment from yml of base environment
   ```bash
   # replace transformer_project with your project name
   conda env create -n transformer_project --file=environment.yml
   ```
+  
 ## Get Going Here: Hugging Face Examples/Resources:
 * [https://github.com/huggingface/transformers](https://github.com/huggingface/transformers)
-## Environment and Preliminaries from Scratch
+
+## Environment and Preliminaries from Scratch with Conda
 * Conda Set Channel Strict conda-forge. Do this from base env prior to creating envs.
   ```bash
   # ensures a predictable selection of dependency management
   conda config --set channel_priority strict
   ```
-* A new conda environment with python 3.8, or change to whatever version
+* A new conda environment with python 3.7; seems to be required
   ```bash
-  conda create -n transformer_project python=3.8
+  conda create -n transformer_project python=3.7
   ```
 * Activate Conda Environment:
   ```bash
@@ -34,11 +36,16 @@
   # verify with the following
   python -c "from transformers import pipeline; print(pipeline('sentiment-analysis')('we love you'))"
   ```
+## Or with setup with pip:
+  ```bash
+  pip3 install --no-cache-dir huggingface huggingface_hub transformers jiant torch torchvision torchaudio progressbar2 tqdm boto3 requests regex sentencepiece sacremoses pandas scikit-learn matplotlib
+  ```
+
 ## General Resources Mostly Based on [Conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 * Feature Resolver sometimes needed based on pip/conda/env
   ```bash
-  # example: pip install <the package> --use-feature=2020-resolver
-  pip install texthero --use-feature=2020-resolver
+  # becoming less necessary and not required in 2021, might be better to just upgrade pip
+  pip install <package_name> --use-feature=2020-resolver
   ```
 * Upgrade Pip:
   ```bash
