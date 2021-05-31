@@ -11,7 +11,7 @@
 ## Get Going Here: Hugging Face Examples/Resources:
 * [https://github.com/huggingface/transformers](https://github.com/huggingface/transformers)
 
-## Environment and Preliminaries from Scratch with Conda
+## Environment and Preliminaries from Scratch with Conda and Pip
 * Conda Set Channel Strict conda-forge. Do this from base env prior to creating envs.
   ```bash
   # ensures a predictable selection of dependency management
@@ -25,6 +25,10 @@
   ```bash
   conda activate transformer_project
   ```
+* Install all dependencies with pip
+  ```bash
+  pip3 install --no-cache-dir huggingface huggingface_hub transformers jiant torch torchvision torchaudio progressbar2 tqdm boto3 requests regex sentencepiece sacremoses pandas scikit-learn matplotlib
+  ```
 * PyTorch conda install with Conda per [the docs](https://pytorch.org/get-started/locally/#start-locally)
   ```bash
   # This template made from macOS
@@ -35,10 +39,6 @@
   conda install -c huggingface transformers
   # verify with the following
   python -c "from transformers import pipeline; print(pipeline('sentiment-analysis')('we love you'))"
-  ```
-## Or with setup with pip:
-  ```bash
-  pip3 install --no-cache-dir huggingface huggingface_hub transformers jiant torch torchvision torchaudio progressbar2 tqdm boto3 requests regex sentencepiece sacremoses pandas scikit-learn matplotlib
   ```
 
 ## General Resources Mostly Based on [Conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
