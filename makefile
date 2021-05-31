@@ -4,3 +4,6 @@ GIT = git
 
 install:
 	 $(PIP) install -r requirements.txt
+
+main:
+	$(PYTHON) main.py
