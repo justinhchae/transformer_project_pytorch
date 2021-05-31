@@ -12,6 +12,10 @@
 ```bash
 python3 main.py
 ```
+* Or run this from [Google Colab](https://colab.research.google.com/drive/1ovTQih-iCt_0yeTOqw17gL0az8qyE-bF?usp=sharing)
+
+## Glue/Jiant Resources:
+* [NYU Jiant](https://github.com/nyu-mll/jiant)
 
 ## Hugging Face Examples/Resources:
 * [https://github.com/huggingface/transformers](https://github.com/huggingface/transformers)
