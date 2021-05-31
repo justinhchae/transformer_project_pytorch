@@ -1,6 +1,0 @@
-{
-  "train": "/Users/cheese/Documents/lData/transformer_project/data/cache/roberta/mrpc/train",
-  "val": "/Users/cheese/Documents/lData/transformer_project/data/cache/roberta/mrpc/val",
-  "val_labels": "/Users/cheese/Documents/lData/transformer_project/data/cache/roberta/mrpc/val_labels",
-  "test": "/Users/cheese/Documents/lData/transformer_project/data/cache/roberta/mrpc/test"
-}

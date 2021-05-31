@@ -1,9 +1,0 @@
-{
-  "task": "mrpc",
-  "paths": {
-    "train": "/Users/cheese/Documents/lData/transformer_project/data/tasks/data/mrpc/train.jsonl",
-    "test": "/Users/cheese/Documents/lData/transformer_project/data/tasks/data/mrpc/test.jsonl",
-    "val": "/Users/cheese/Documents/lData/transformer_project/data/tasks/data/mrpc/val.jsonl"
-  },
-  "name": "mrpc"
-}

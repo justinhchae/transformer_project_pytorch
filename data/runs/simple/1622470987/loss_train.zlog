@@ -1,7 +1,0 @@
-{"task": "mrpc", "task_step": 1, "global_step": 1, "loss_val": 0.7695379257202148, "TIMESTAMP": 1622471013.311584}
-{"task": "mrpc", "task_step": 2, "global_step": 2, "loss_val": 0.7298466563224792, "TIMESTAMP": 1622471034.796128}
-{"task": "mrpc", "task_step": 3, "global_step": 3, "loss_val": 0.7241555452346802, "TIMESTAMP": 1622471056.1187189}
-{"task": "mrpc", "task_step": 4, "global_step": 4, "loss_val": 0.7088980078697205, "TIMESTAMP": 1622471077.4338439}
-{"task": "mrpc", "task_step": 5, "global_step": 5, "loss_val": 0.7709569334983826, "TIMESTAMP": 1622471098.745706}
-{"task": "mrpc", "task_step": 6, "global_step": 6, "loss_val": 0.7691976428031921, "TIMESTAMP": 1622471120.01525}
-{"task": "mrpc", "task_step": 7, "global_step": 7, "loss_val": 0.7067474126815796, "TIMESTAMP": 1622471141.2393448}
