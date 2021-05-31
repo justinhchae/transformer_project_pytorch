@@ -4,7 +4,7 @@ from jiant.proj.simple import runscript as run
 import jiant.scripts.download_data.runscript as downloader
 
 
-def validate_jian():
+def validate_jiant():
     # validation scripts
     # https://github.com/nyu-mll/jiant
 
