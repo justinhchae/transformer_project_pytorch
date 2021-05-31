@@ -40,7 +40,6 @@ python3 main.py
   ```
 * Not Required if using previous pip installs - PyTorch conda install with Conda per [the docs](https://pytorch.org/get-started/locally/#start-locally)
   ```bash
-  # This template made from macOS
   conda install pytorch torchvision torchaudio -c pytorch
   ```
 * Not Required if using previous pip installs - Transformers install with conda per [the docs](https://huggingface.co/transformers/installation.html)
