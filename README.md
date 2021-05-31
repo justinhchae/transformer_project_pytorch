@@ -7,8 +7,13 @@
   # replace transformer_project with your project name
   conda env create -n transformer_project --file=environment.yml
   ```
-  
-## Get Going Here: Hugging Face Examples/Resources:
+## Get Started
+* Test environment configuration and set up with jian validation script:
+```bash
+python3 main.py
+```
+
+## Hugging Face Examples/Resources:
 * [https://github.com/huggingface/transformers](https://github.com/huggingface/transformers)
 
 ## Environment and Preliminaries from Scratch with Conda and Pip
