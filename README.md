@@ -38,12 +38,12 @@ python3 main.py
   ```bash
   pip3 install --no-cache-dir huggingface huggingface_hub transformers jiant torch torchvision torchaudio progressbar2 tqdm boto3 requests regex sentencepiece sacremoses pandas scikit-learn matplotlib
   ```
-* PyTorch conda install with Conda per [the docs](https://pytorch.org/get-started/locally/#start-locally)
+* Not Required if using previous pip installs - PyTorch conda install with Conda per [the docs](https://pytorch.org/get-started/locally/#start-locally)
   ```bash
   # This template made from macOS
   conda install pytorch torchvision torchaudio -c pytorch
   ```
-* Transformers install with conda per [the docs](https://huggingface.co/transformers/installation.html)
+* Not Required if using previous pip installs - Transformers install with conda per [the docs](https://huggingface.co/transformers/installation.html)
   ```bash
   conda install -c huggingface transformers
   # verify with the following

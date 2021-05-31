@@ -21,7 +21,7 @@ def validate_jiant():
         hf_pretrained_model_name_or_path="roberta-base",
         tasks="mrpc",
         train_batch_size=16,
-        num_train_epochs=3
+        num_train_epochs=1
     )
 
     # Run!
