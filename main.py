@@ -14,6 +14,6 @@ if __name__ == '__main__':
 
     # make a tokenizer from HF library
     tokenizer = util.make_tokenizer(bert_case_type)
-
+    # run the jiant validator script
     util.validate_jiant()
 
