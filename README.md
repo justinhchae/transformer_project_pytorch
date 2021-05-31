@@ -8,7 +8,7 @@
   conda env create -n transformer_project --file=environment.yml
   ```
 ## Get Started
-* Test environment configuration and set up with jian validation script:
+* Test environment configuration and set up with jiant validation script:
 ```bash
 python3 main.py
 ```
