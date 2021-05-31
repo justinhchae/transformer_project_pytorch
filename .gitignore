@@ -137,3 +137,4 @@ dmypy.json
 .idea/
 /cache/
 /figures/
+/data/
