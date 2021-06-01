@@ -15,6 +15,4 @@ class Model(torch.nn.Module):
         bert_output = self.bert(x, attention_mask=att)
         output = self.linearOut(bert_output.last_hidden_state)
 
-        X = torch.flatten(output, start_dim=1)
-
         return output
