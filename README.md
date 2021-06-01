@@ -1,6 +1,6 @@
 # transformer_project_pytorch
- A starter template to get going with a hugging face transformer project with pytorch.
- Template Source: [https://github.com/justinhchae/transformer_project_pytorch](https://github.com/justinhchae/transformer_project_pytorch)
+ * A starter template to get going with a hugging face transformer project with pytorch.
+ * Template Source: [https://github.com/justinhchae/transformer_project_pytorch](https://github.com/justinhchae/transformer_project_pytorch)
  
 
 ## Environment Setup with Conda ENV
