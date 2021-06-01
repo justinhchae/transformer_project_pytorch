@@ -41,6 +41,7 @@ def run_network(device):
 
     optim = AdamW(model.parameters(), lr=5e-5)
 
+    # testing out network with model config from distil bert
     for epoch in range(1):
         model.train()
         for labels, encoded_batch in train_loader:
