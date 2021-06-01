@@ -11,6 +11,6 @@ if __name__ == '__main__':
     # run validator for data structures and model
     network.run_network(device)
 
-    # run the jiant validator script
+    # uncomment below to run the jiant validator script
     # util.validate_jiant()
 
