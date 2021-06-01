@@ -23,7 +23,7 @@ def run_network(device):
     bert_name = 'bert'
     bert_case_type = 'cased'
     # set batch size (could be as high as 32 or so)
-    batch_size = 64
+    batch_size = 16
     tensor_type = "pt"
 
     # make a tokenizer from HF library
@@ -45,6 +45,7 @@ def run_network(device):
     train_loader = DataLoader(split_train_, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
 
     # check how the encoder/decoder works on a single input after encoding and batching
+    print("=" * 40)
     for labels, batch in train_loader:
         print('Example of decoding encoded text with bert toknizer:')
         pprint(tokenizer.decode(batch['input_ids'][0]))
