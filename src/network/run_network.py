@@ -41,9 +41,10 @@ def run_network(device):
 
     optim = AdamW(model.parameters(), lr=5e-5)
 
-    # testing out network with model config from distil bert
+    # demonstrating a single pass through a network with distil berg configs
     for epoch in range(1):
         model.train()
+
         for labels, encoded_batch in train_loader:
             optim.zero_grad()
             input_ids = encoded_batch['input_ids'].to(device)
@@ -52,8 +53,8 @@ def run_network(device):
             labels = labels.to(device)
             outputs = model(x=input_ids, att=attention_mask)
             print(outputs.size())
-
+            # returning batched outputs as last hidden states for each input
             break
         break
 
-    #
+    # add additional things here
