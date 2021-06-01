@@ -1,19 +1,24 @@
 import torch
-from transformers import DistilBertConfig, DistilBertModel
 
 
 class Model(torch.nn.Module):
     def __init__(self):
         super().__init__()
 
-        configuration = DistilBertConfig()
-        self.dim = configuration.dim
-        self.bert = DistilBertModel(configuration)
-        self.linearOut = torch.nn.Linear(self.dim, 1)
+        self.bert = torch.hub.load('huggingface/pytorch-transformers'
+                                   , 'model'
+                                   , 'bert-base-uncased'
+                                   , output_hidden_states=True)
 
-    def forward(self, x, att):
-        bert_output = self.bert(x, attention_mask=att)
+        config = self.bert.config
+        self.hidden_size = config.hidden_size
+        self.fc = torch.nn.Linear(self.hidden_size, 2)
+
+    def forward(self, input_ids, attention_mask, token_type_ids):
+        bert_output = self.bert(input_ids=input_ids
+                                , attention_mask=attention_mask
+                                , token_type_ids=token_type_ids)
+        # batch x input len x bert dim
         last_hidden_state = bert_output.last_hidden_state
-        output = self.linearOut(last_hidden_state)
-
-        return output
+        # TODO: apply
+        return last_hidden_state

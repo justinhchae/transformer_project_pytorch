@@ -21,7 +21,7 @@ python3 main.py
 
 ## Hugging Face Examples/Resources:
 * [https://github.com/huggingface/transformers](https://github.com/huggingface/transformers)
-
+* [https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert](https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert)
 ## Environment and Preliminaries from Scratch with Conda and Pip
 * Conda Set Channel Strict conda-forge. Do this from base env prior to creating envs.
   ```bash

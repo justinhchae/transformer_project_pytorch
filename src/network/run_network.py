@@ -12,7 +12,7 @@ from transformers import DistilBertConfig, DistilBertModel
 
 
 def run_network(device):
-    bert_name = 'distilbert'
+    bert_name = 'bert'
     bert_case_type = 'cased'
     # set batch size (could be as high as 32 or so)
     batch_size = 4
@@ -49,11 +49,15 @@ def run_network(device):
             optim.zero_grad()
             input_ids = encoded_batch['input_ids'].to(device)
             attention_mask = encoded_batch['attention_mask'].to(device)
-
+            token_type_ids = encoded_batch['token_type_ids'].to(device)
+            # TODO Incorporate labels into model ouput and loss function
             labels = labels.to(device)
-            outputs = model(x=input_ids, att=attention_mask)
+            outputs = model(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+            # tensor of batch: x input length x 768-hidden
             print(outputs.size())
-            # returning batched outputs as last hidden states for each input
+            # size of first tensor in batch: input length x 768-hidden
+            print(outputs[0].size())
+
             break
         break
 
