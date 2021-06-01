@@ -50,8 +50,7 @@ def run_network(device):
 
             labels = labels.to(device)
             outputs = model(x=input_ids, att=attention_mask)
-            print(outputs[0].size())
-            print(outputs[1].size())
+            print(outputs.size())
 
             break
         break
