@@ -23,12 +23,12 @@ def run_network(device):
     bert_name = 'bert'
     bert_case_type = 'cased'
     # set batch size (could be as high as 32 or so)
-    batch_size = 4
+    batch_size = 64
     tensor_type = "pt"
 
     # make a tokenizer from HF library
     tokenizer = util.make_tokenizer(bert_name, bert_case_type)
-    tokenizer_ = partial(tokenizer, padding=True, truncation=True, add_special_tokens=True, return_tensors="pt")
+    tokenizer_ = partial(tokenizer, padding=True, truncation=True, add_special_tokens=True, return_tensors=tensor_type)
 
     # download a simple dataset and read it from disk to simulate reading from a custom dataset
     ag_news_path = os.sep.join([util.constants.DATA_PATH, 'ag_news'])
@@ -48,6 +48,7 @@ def run_network(device):
     for labels, batch in train_loader:
         print('Example of decoding encoded text with bert toknizer:')
         pprint(tokenizer.decode(batch['input_ids'][0]))
+        print("=" * 40)
         break
 
     model = network.bert_models.Model(num_labels=num_labels)
@@ -89,6 +90,8 @@ def run_network(device):
     # validation accuracy, and timings.
     training_stats = []
     curr_step = 0
+    print("=" * 10, 'Starting Training\n')
+
     with progressbar.ProgressBar(max_value=total_steps) as progress:
 
         for epoch_i in range(0, epochs):
