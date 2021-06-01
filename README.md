@@ -7,7 +7,7 @@
 * Create a conda environment from yml of base environment
   ```bash
   # replace transformer_project with your project name
-  conda env create -n transformer_project --file=environment.yml
+  conda create -n transformer_project --file=environment.yml
   ```
 ## Get Started
 * Test environment configuration and set up with jiant validation script:
