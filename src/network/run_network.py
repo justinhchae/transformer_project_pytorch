@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 from torch.utils.data.dataset import random_split
 from functools import partial
 from transformers import AdamW
-from transformers import DistilBertConfig, DistilBertModel
+from pprint import pprint
 
 
 def run_network(device):
@@ -38,18 +38,19 @@ def run_network(device):
 
     # check how the encoder/decoder works on a single input after encoding and batching
     for labels, batch in train_loader:
-        print(tokenizer.decode(batch['input_ids'][0]))
+        print('Example of decoding encoded text with bert toknizer:')
+        pprint(tokenizer.decode(batch['input_ids'][0]))
         break
 
-    model = network.bert_models.Model()
+    model = network.bert_models.Model(num_labels=num_labels)
     model.to(device)
 
     optim = AdamW(model.parameters(), lr=5e-5)
 
     # demonstrating a single pass through a network with distil berg configs
-    for epoch in range(1):
-        model.train()
 
+    model.eval()
+    with torch.no_grad():
         for labels, encoded_batch in train_loader:
             optim.zero_grad()
             input_ids = encoded_batch['input_ids'].to(device)
@@ -57,13 +58,13 @@ def run_network(device):
             token_type_ids = encoded_batch['token_type_ids'].to(device)
             # TODO Incorporate labels into model ouput and loss function
             labels = labels.to(device)
-            outputs = model(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
-            # tensor of batch: x input length x 768-hidden
-            print(outputs.size())
-            # size of first tensor in batch: input length x 768-hidden
-            print(outputs[0].size())
+            output = model(input_ids=input_ids
+                            , attention_mask=attention_mask
+                            , token_type_ids=token_type_ids
+                            , labels=labels
+                            )
+            print(output.size())
 
             break
-        break
 
     # add additional things here

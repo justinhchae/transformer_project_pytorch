@@ -49,8 +49,11 @@ def collate_batch(batch, tokenizer):
     labels = []
     batch_texts = []
 
+    # https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
+    label_pipeline = lambda x: int(x) - 1
+
     for (_label, batch_text) in batch:
-        labels.append(_label)
+        labels.append(label_pipeline(_label))
         batch_texts.append(batch_text)
 
     labels = torch.tensor(labels, dtype=torch.long)
