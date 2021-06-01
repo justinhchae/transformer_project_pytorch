@@ -16,26 +16,33 @@ class Model(torch.nn.Module):
         self.hidden_size = config.hidden_size
         self.fc = torch.nn.Linear(self.hidden_size, 1)
 
-    def get_CLS_embedding(self, layer):
+    def get_CLS_embeddings(self, layer):
         """Reference: @neeraj2020bertlayers, https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert
         """
         return layer[:, 0, :].detach().numpy()
 
+    def make_cls_embeddings(self, output, echo=False):
+        """Reference: @neeraj2020bertlayers, https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert
+        """
+        # returning the bert hidden states as 3-tuple of context data
+        hidden_states = output.hidden_states
+
+        # Per @neeraj2020bertlayers: return just the CLS context for classification tasks
+        cls_embeddings = torch.tensor([self.get_CLS_embeddings(hidden_states[i]) for i in range(12)])
+        # cls embeddings: batch x 768-dim
+        if echo:
+            print('Hidden states as Embeddings:', len(hidden_states), type(hidden_states))
+            print("cls embeddings:", len(cls_embeddings), type(cls_embeddings), cls_embeddings[0].shape)
+
+        return cls_embeddings
+
     def forward(self, input_ids, attention_mask, token_type_ids, labels=None):
         output = self.bert(input_ids=input_ids
-                                , attention_mask=attention_mask
-                                , token_type_ids=token_type_ids
-                                , labels=labels
-                                )
-        # == alternate way to extract targeted cls embeddings == #
-        # returning the bert hidden states as 3-tuple of context data
-        embeddings = output.hidden_states
-        print('Embeddings:', len(embeddings), type(embeddings))
-        # Per @neeraj2020bertlayers: return just the CLS context for classification tasks
-        cls_embeddings = torch.tensor([self.get_CLS_embedding(embeddings[i]) for i in range(12)])
-        # cls embeddings: batch x 768-dim
-        print("cls embeddings:", len(cls_embeddings), type(cls_embeddings), cls_embeddings[0].shape)
-        x = self.fc(cls_embeddings)
-        print(x)
+                           , attention_mask=attention_mask
+                           , token_type_ids=token_type_ids
+                           , labels=labels
+                           )
 
-        return x
+        # x = self.make_cls_embeddings(output)
+
+        return output
