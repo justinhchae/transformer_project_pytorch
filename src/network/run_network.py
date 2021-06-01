@@ -36,6 +36,11 @@ def run_network(device):
 
     train_loader = DataLoader(split_train_, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
 
+    # check how the encoder/decoder works on a single input after encoding and batching
+    for labels, batch in train_loader:
+        print(tokenizer.decode(batch['input_ids'][0]))
+        break
+
     model = network.bert_models.Model()
     model.to(device)
 
