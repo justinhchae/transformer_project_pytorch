@@ -7,19 +7,10 @@ from torch.utils.data import Dataset
 pd.set_option('display.max_columns', None)
 
 
-def get_data(train_filename='train.csv'
-             , test_filename='test.csv'
-             ):
-    test_df = None
+def get_data(data_full_path, header=1):
+    train_df = pd.read_csv(data_full_path, header=header)
 
-    train_filepath = os.sep.join([constants.DATA_PATH, train_filename])
-    train_df = pd.read_csv(train_filepath)
-
-    if test_filename is not None:
-        test_filepath = os.sep.join([constants.DATA_PATH, test_filename])
-        test_df = pd.read_csv(test_filepath)
-
-    return train_df, test_df
+    return train_df
 
 
 class TextOnlyDataset(Dataset):
@@ -34,7 +25,6 @@ class TextOnlyDataset(Dataset):
         self.df = df if sample_size is None else df.sample(sample_size)
         self.text_col = text_col
         self.label_col = label_col
-        # self.tokenizer = tokenizer
         self.label = None
         self.tensor_type = tensor_type
         self.padding = padding
@@ -44,12 +34,28 @@ class TextOnlyDataset(Dataset):
 
     def __getitem__(self, idx):
         text = self.df.iloc[idx][self.text_col]
+        label = self.df.iloc[idx][self.label_col]
         return text
 
 
-def make_tokenizer(bert_case_type):
+def make_tokenizer(bert_name, bert_case_type):
     tokenizer = torch.hub.load('huggingface/pytorch-transformers'
                                , 'tokenizer'
-                               , f'bert-base-{bert_case_type}')
+                               , f'{bert_name}-base-{bert_case_type}')
     return tokenizer
+
+
+def collate_batch(batch, tokenizer):
+    labels = []
+    batch_texts = []
+
+    for (_label, batch_text) in batch:
+        labels.append(_label)
+        batch_texts.append(batch_text)
+
+    labels = torch.tensor(labels, dtype=torch.long)
+    encoded_batch = tokenizer(batch_texts)
+
+    return labels, encoded_batch
+
 
