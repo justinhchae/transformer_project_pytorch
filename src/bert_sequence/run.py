@@ -29,7 +29,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
     batch_size = 8
     tensor_type = "pt"
     shuffle_dataloader = True
-    epochs = 3
+    epochs = 2
     learning_rate = 5e-5
 
     # make a tokenizer from HF library
