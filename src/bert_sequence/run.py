@@ -26,7 +26,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
     bert_case_type = 'uncased'
     bert_type = f"{bert_name}-base-{bert_case_type}"
     bert_variation = "modelForSequenceClassification"
-    batch_size = 16
+    batch_size = 8
     tensor_type = "pt"
     shuffle_dataloader = True
     epochs = 3
