@@ -1,6 +1,7 @@
 from src import utils, bert_sequence
 import torch
 
+# sets global path to torch.hub cache (for download and recall)
 torch.hub.set_dir(utils.constants.CACHE_PATH)
 
 
