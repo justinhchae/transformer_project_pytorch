@@ -29,16 +29,14 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
     batch_size = 8
     tensor_type = "pt"
     shuffle_dataloader = True
-    epochs = 3
+    epochs = 2
     learning_rate = 5e-5
 
     # make a tokenizer from HF library
     tokenizer = utils.make_tokenizer(bert_name, bert_case_type)
-    # freeze partial function signature
-    tokenizer_ = partial(tokenizer, padding=True, truncation=True, add_special_tokens=True, return_tensors=tensor_type)
-    # make data loader objects and apply tokenizer
-    data = utils.data.get_corpora(torch_corpora_name=torch_corpora_name, tokenizer=tokenizer_, batch_size=batch_size
-                                  , shuffle_dataloader=shuffle_dataloader)
+
+    data = utils.data.get_corpora(torch_corpora_name=torch_corpora_name, tokenizer=tokenizer, batch_size=batch_size
+                                  , shuffle_dataloader=shuffle_dataloader, tensor_type=tensor_type)
 
     train_loader = data['train_loader']
     test_loader = data['test_loader']
@@ -65,12 +63,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
                                                 , num_warmup_steps=0
                                                 , num_training_steps=total_steps)
 
-    """
-    the following section is based on: 
-    https://mccormickml.com/2019/07/22/BERT-fine-tuning/
-    """
-
-    # validation accuracy, and timings.
+    # validation accuracy, and timings
     training_stats = []
     curr_step = 0
     total_t0 = time.time()

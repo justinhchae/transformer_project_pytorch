@@ -44,10 +44,15 @@ def get_torch_corpora(torch_corpora_name):
     return train_iter, test_iter
 
 
-def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=False, torch_corpora_name="ag_news"):
+def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=False, torch_corpora_name="ag_news"
+                , tensor_type="pt"):
     # use a simple, pre-canned dataset for multi-class text classification
     train_iter, test_iter = get_torch_corpora(torch_corpora_name=torch_corpora_name)
     train_data, test_data = list(train_iter), list(test_iter)
+
+    # freeze partial function signature
+    tokenizer = partial(tokenizer, padding=True, truncation=True, add_special_tokens=True, return_tensors=tensor_type)
+    # make data loader objects and apply tokenizer
 
     # for batching, apply collate function with tokenizer in data loader objects
     collate_fn = partial(utils.collate_batch, tokenizer=tokenizer)
