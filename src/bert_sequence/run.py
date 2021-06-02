@@ -93,10 +93,11 @@ def network(device, use_seed=False, torch_corpora_name="ag_news"):
 
             training_stats.append(
                 {
+                    'corpora': torch_corpora_name,
                     'epoch': epoch_i + 1,
                     'Training Loss': avg_train_loss,
-                    'Test. Loss': avg_test_loss,
-                    'TEst. Accur.': avg_test_accuracy,
+                    'Test Loss': avg_test_loss,
+                    'Test Accuracy': avg_test_accuracy,
                     'Epoch Time': epoch_time,
                 }
             )
@@ -106,3 +107,4 @@ def network(device, use_seed=False, torch_corpora_name="ag_news"):
 
     print("Total training took {:} (h:mm:ss)".format(utils.train_helpers.format_time(time.time() - total_t0)))
     pprint(training_stats)
+    return training_stats
