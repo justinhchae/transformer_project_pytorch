@@ -79,6 +79,7 @@ def label_pipeline(sentiment_map, x):
 
     return x_prime - 1
 
+
 def collate_batch(batch, tokenizer):
     labels = []
     batch_texts = []
