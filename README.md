@@ -5,7 +5,8 @@
 ## Why use this template?
  * To experiment with various data structures, models, and methods that involve transformers and language modeling
  * Learn more about Hugging Face, Bert, and PyTorch
- * Leverage state of the art pretrained models from saved model check points for comparison testing locally 
+ * Leverage state of the art pretrained models from saved model check points for comparison testing locally
+ * The environmental dependencies and code ready to go out of the box and ready to configure for your own project 
 
 ## Environment Setup with Conda ENV
 * Create a conda environment from yml of base environment
