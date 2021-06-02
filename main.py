@@ -12,7 +12,7 @@ if __name__ == '__main__':
     # run config scripts to make folders and things
     device = utils.config.run()
 
-    torch_corpora_names = ['ag_news', 'dbpedia', 'imdb', 'amazon_review', 'yelp_review']
+    torch_corpora_names = ['ag_news', 'dbpedia', 'imdb', 'amazon_polarity', 'yelp_review', 'yelp_review', 'sogou_news', 'yahoo_answers']
 
     results = []
     # run the network for the bert sequence classification model

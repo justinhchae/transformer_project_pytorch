@@ -10,6 +10,9 @@ from torchtext.datasets.dbpedia import DBpedia
 from torchtext.datasets.imdb import IMDB
 from torchtext.datasets.amazonreviewpolarity import AmazonReviewPolarity
 from torchtext.datasets.yelpreviewpolarity import YelpReviewPolarity
+from torchtext.datasets.yelpreviewfull import YelpReviewFull
+from torchtext.datasets.sogounews import SogouNews
+from torchtext.datasets.yahooanswers import YahooAnswers
 from functools import partial
 from pprint import pprint
 
@@ -25,10 +28,16 @@ def get_torch_corpora(torch_corpora_name):
         train_iter, test_iter = DBpedia(root=corpora_path)
     elif "imdb" in torch_corpora_name:
         train_iter, test_iter = IMDB(root=corpora_path)
-    elif "amazon_review" in torch_corpora_name:
+    elif "amazon_polarity" in torch_corpora_name:
         train_iter, test_iter = AmazonReviewPolarity(root=corpora_path)
-    elif "yelp_review" in torch_corpora_name:
+    elif "yelp_polarity" in torch_corpora_name:
         train_iter, test_iter = YelpReviewPolarity(root=corpora_path)
+    elif "yelp_review" in torch_corpora_name:
+        train_iter, test_iter = YelpReviewFull(root=corpora_path)
+    elif "sogou_news" in torch_corpora_name:
+        train_iter, test_iter = SogouNews(root=corpora_path)
+    elif "yahoo_answers" in torch_corpora_name:
+        train_iter, test_iter = YahooAnswers(root=corpora_path)
     else:
         return None, None
 
