@@ -31,7 +31,7 @@ def run_network(device):
     bert_name = 'bert'
     bert_case_type = 'uncased'
     # set batch size (could be as high as 32 or so)
-    batch_size = 32
+    batch_size = 16
     tensor_type = "pt"
 
     # make a tokenizer from HF library
