@@ -210,5 +210,6 @@ def run_network(device):
             print("Training complete!")
 
             print("Total training took {:} (h:mm:ss)".format(format_time(time.time() - total_t0)))
+            pprint(training_stats)
 
 
