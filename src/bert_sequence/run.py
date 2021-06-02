@@ -75,15 +75,17 @@ def network(device, use_seed=False):
 
         for epoch_i in range(0, epochs):
             t0 = time.time()
-            avg_train_loss = train_epoch(model, train_loader, optim, progress, scheduler, curr_step, device
+            avg_train_loss, curr_step = train_epoch(model, train_loader, optim, progress, scheduler, curr_step, device
                                          , break_test=do_break_testing)
             print("")
+            print("=" * 20, f"Epoch: {epoch_i}", "=" * 20)
             print("  Average training loss: {0:.2f}".format(avg_train_loss))
             avg_test_accuracy = test_epoch(model, test_loader, device
                                        , break_test=do_break_testing)
 
             print("")
             print("  Accuracy: {0:.2f}".format(avg_test_accuracy))
+            print("=" * 20)
 
 
         # TODO:Clean up training structures and metrics

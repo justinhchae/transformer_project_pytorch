@@ -36,4 +36,4 @@ def train_epoch(model, data_loader, optimizer, progress, scheduler, curr_step, d
 
     avg_train_loss = total_train_loss / len(data_loader)
 
-    return avg_train_loss
+    return avg_train_loss, curr_step
