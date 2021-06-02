@@ -97,3 +97,14 @@ python3 main.py
   # reset the cache
   git rm -r --cached .
   ```
+  
+  
+  ## Citations
+  
+  @article{neeraj2020bertlayers,
+    title = "Feature-based Approach with BERT",
+    author = "Neeraj, Trishala",
+    journal = "trishalaneeraj.github.io",
+    year = "2020",
+    url = "https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert"}
+
