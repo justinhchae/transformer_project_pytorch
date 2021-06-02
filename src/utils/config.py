@@ -23,3 +23,6 @@ def make_dirs():
 
     if not os.path.exists(constants.FIG_PATH):
         os.makedirs(constants.FIG_PATH)
+
+    if not os.path.exists(constants.MODEL_PATH):
+        os.makedirs(constants.MODEL_PATH)

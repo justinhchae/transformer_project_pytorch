@@ -122,3 +122,12 @@ def demo_encoder_decoder(data_loader, tokenizer, torch_corpora_name):
         print("=" * 40)
         break
 
+
+def save_model(model, filename='my_torch_model'):
+    # Reference: https://pytorch.org/tutorials/beginner/saving_loading_models.html
+    filename = f'{filename}.pt' if ".pt" not in filename else filename
+
+    filepath = os.sep.join([utils.constants.MODEL_PATH, filename])
+
+    torch.save(model.state_dict(), filepath)
+    return filepath

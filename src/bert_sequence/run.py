@@ -109,4 +109,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
     print("Total training took {:} (h:mm:ss)".format(utils.train_helpers.format_time(time.time() - total_t0)))
     pprint(training_stats)
     print("=" * 40, "\n")
+
+    model_save = utils.data.save_model(model, f"{torch_corpora_name}_{bert_name}")
+    print(f"Saving model state dict to {model_save}")
     return training_stats
