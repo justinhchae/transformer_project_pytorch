@@ -37,6 +37,7 @@ class Model(torch.nn.Module):
         return cls_embeddings
 
     def forward(self, input_ids, attention_mask, token_type_ids, labels=None):
+
         output = self.bert(input_ids=input_ids
                            , attention_mask=attention_mask
                            , token_type_ids=token_type_ids

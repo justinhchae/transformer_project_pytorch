@@ -20,15 +20,28 @@ import progressbar
 
 
 def run_network(device):
+    # Set the seed value all over the place to make this reproducible.
+    seed_val = 42
+
+    random.seed(seed_val)
+    np.random.seed(seed_val)
+    torch.manual_seed(seed_val)
+    torch.cuda.manual_seed_all(seed_val)
+
     bert_name = 'bert'
-    bert_case_type = 'cased'
+    bert_case_type = 'uncased'
     # set batch size (could be as high as 32 or so)
     batch_size = 16
     tensor_type = "pt"
 
     # make a tokenizer from HF library
     tokenizer = util.make_tokenizer(bert_name, bert_case_type)
-    tokenizer_ = partial(tokenizer, padding=True, truncation=True, add_special_tokens=True, return_tensors=tensor_type)
+    tokenizer_ = partial(tokenizer
+                         , padding=True
+                         , truncation=True
+                         , add_special_tokens=True
+                         , return_tensors=tensor_type
+                         )
 
     # download a simple dataset and read it from disk to simulate reading from a custom dataset
     ag_news_path = os.sep.join([util.constants.DATA_PATH, 'ag_news'])
@@ -57,7 +70,7 @@ def run_network(device):
 
     optim = AdamW(model.parameters(), lr=5e-5)
     epochs = 2
-    total_steps = (len(train_loader) // batch_size) * epochs
+    total_steps = len(train_loader) * epochs
     scheduler = get_linear_schedule_with_warmup(optimizer=optim
                                                 , num_warmup_steps=0
                                                 , num_training_steps=total_steps)
@@ -74,20 +87,11 @@ def run_network(device):
 
     def format_time(elapsed):
         # Round to the nearest second.
-        elapsed_rounded = int(round((elapsed)))
+        elapsed_rounded = int(round(elapsed))
 
         # Format as hh:mm:ss
         return str(datetime.timedelta(seconds=elapsed_rounded))
 
-    # Set the seed value all over the place to make this reproducible.
-    seed_val = 42
-
-    random.seed(seed_val)
-    np.random.seed(seed_val)
-    torch.manual_seed(seed_val)
-    torch.cuda.manual_seed_all(seed_val)
-
-    # We'll store a number of quantities such as training and validation loss,
     # validation accuracy, and timings.
     training_stats = []
     curr_step = 0
