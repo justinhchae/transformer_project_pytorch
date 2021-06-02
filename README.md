@@ -25,7 +25,6 @@ python3 main.py
 
 ## Hugging Face Bert PyTorchExamples/Resources:
 * [https://github.com/huggingface/transformers](https://github.com/huggingface/transformers)
-* [https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert](https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert)
 * [https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html](https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html)
 * [https://mccormickml.com/2019/07/22/BERT-fine-tuning/](https://mccormickml.com/2019/07/22/BERT-fine-tuning/)
 * [https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert](https://trishalaneeraj.github.io/2020-04-04/feature-based-approach-with-bert)
@@ -100,8 +99,36 @@ python3 main.py
   
   
   ## Works Cited
-  
-  @article{neeraj2020bertlayers,
+<a id="1">[1]</a> 
+@inproceedings{wolf-etal-2020-transformers,
+    title = "Transformers: State-of-the-Art Natural Language Processing",
+    author = "Thomas Wolf and Lysandre Debut and Victor Sanh and Julien Chaumond and Clement Delangue and Anthony Moi and Pierric Cistac and Tim Rault and Rémi Louf and Morgan Funtowicz and Joe Davison and Sam Shleifer and Patrick von Platen and Clara Ma and Yacine Jernite and Julien Plu and Canwen Xu and Teven Le Scao and Sylvain Gugger and Mariama Drame and Quentin Lhoest and Alexander M. Rush",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+    month = oct,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-demos.6",
+    pages = "38--45"
+}
+
+<a id="1">[2]</a>
+@incollection{NEURIPS2019_9015,
+    title = {PyTorch: An Imperative Style, High-Performance Deep Learning Library},
+    author = {Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, Adam and Bradbury, James and Chanan, Gregory and Killeen, Trevor and Lin, Zeming and Gimelshein, Natalia and Antiga, Luca and Desmaison, Alban and Kopf, Andreas and Yang, Edward and DeVito, Zachary and Raison, Martin and Tejani, Alykhan and Chilamkurthy, Sasank and Steiner, Benoit and Fang, Lu and Bai, Junjie and Chintala, Soumith},
+    booktitle = {Advances in Neural Information Processing Systems 32},
+    editor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},
+    pages = {8024--8035},
+    year = {2019},
+    publisher = {Curran Associates, Inc.},
+    url = {http://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library.pdf}
+}
+
+<a id="1">[3]</a>
+Chris McCormick and Nick Ryan. (2019, July 22). BERT Fine-Tuning Tutorial with PyTorch. Retrieved from http://www.mccormickml.com
+
+<a id="1">[4]</a>
+@article{neeraj2020bertlayers,
     title = "Feature-based Approach with BERT",
     author = "Neeraj, Trishala",
     journal = "trishalaneeraj.github.io",
