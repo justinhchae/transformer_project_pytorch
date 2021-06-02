@@ -42,6 +42,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
 
     train_loader = data['train_loader']
     test_loader = data['test_loader']
+    # TODO: allow test/validation split from a single test set
     if "valid_loader" in data.keys():
         valid_loader = data['valid_loader']
     else:
