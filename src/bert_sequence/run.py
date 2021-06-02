@@ -81,7 +81,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
             avg_train_loss, curr_step = train_epoch(model, train_loader, optim, progress, scheduler, curr_step, device
                                                     , break_test=do_break_testing)
             print("")
-            print("=" * 20, f"Epoch: {epoch_i}", "=" * 20)
+            print("=" * 20, f"Epoch: {epoch_i} | Corpora: {torch_corpora_name}", "=" * 20)
             print("  Average training loss: {0:.2f}".format(avg_train_loss))
             avg_test_accuracy, avg_test_loss = test_epoch(model, test_loader, device, break_test=do_break_testing)
             print("  Test Loss: {0:.2f}".format(avg_test_loss))
