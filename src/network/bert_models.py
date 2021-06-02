@@ -3,12 +3,19 @@ from transformers import BertConfig
 
 
 class Model(torch.nn.Module):
-    def __init__(self, num_labels=2, bert_type="bert-base-uncased"):
+    def __init__(self
+                 , num_labels=2
+                 , activation="gelu"
+                 , bert_type="bert-base-uncased"
+                 , bert_variation="modelForSequenceClassification"):
         super().__init__()
-        config = BertConfig.from_pretrained(bert_type, output_hidden_states=True, num_labels=num_labels)
+        config = BertConfig.from_pretrained(bert_type
+                                            , output_hidden_states=True
+                                            , num_labels=num_labels
+                                            , hidden_act=activation)
 
         self.bert = torch.hub.load('huggingface/pytorch-transformers'
-                                   , 'modelForSequenceClassification'
+                                   , bert_variation
                                    , bert_type
                                    , config=config)
 
@@ -33,7 +40,7 @@ class Model(torch.nn.Module):
         if echo:
             print('Hidden states as Embeddings:', len(hidden_states), type(hidden_states))
             print("cls embeddings:", len(cls_embeddings), type(cls_embeddings), cls_embeddings[0].shape)
-
+        # return the embeddings for the CLS token representing the document embedding space
         return cls_embeddings
 
     def forward(self, input_ids, attention_mask, token_type_ids, labels=None):
@@ -43,7 +50,5 @@ class Model(torch.nn.Module):
                            , token_type_ids=token_type_ids
                            , labels=labels
                            )
-
-        # x = self.make_cls_embeddings(output)
 
         return output

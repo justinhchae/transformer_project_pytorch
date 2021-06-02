@@ -18,6 +18,7 @@ import datetime
 import random
 import progressbar
 
+# TODO: clean up code into functions/modules
 
 def run_network(device):
     # Set the seed value all over the place to make this reproducible.
@@ -30,9 +31,13 @@ def run_network(device):
 
     bert_name = 'bert'
     bert_case_type = 'uncased'
-    # set batch size (could be as high as 32 or so)
+    bert_type = f"{bert_name}-base-{bert_case_type}"
+    bert_variation = "modelForSequenceClassification"
     batch_size = 16
     tensor_type = "pt"
+    shuffle_dataloader = True
+    epochs = 2
+    learning_rate = 5e-5
 
     # make a tokenizer from HF library
     tokenizer = util.make_tokenizer(bert_name, bert_case_type)
@@ -43,7 +48,7 @@ def run_network(device):
                          , return_tensors=tensor_type
                          )
 
-    # download a simple dataset and read it from disk to simulate reading from a custom dataset
+    # use a simple, pre-canned dataset for multi-class text classification
     ag_news_path = os.sep.join([util.constants.DATA_PATH, 'ag_news'])
     train_iter, test_iter = AG_NEWS(root=ag_news_path)
     train_data, test_data = list(train_iter), list(test_iter)
@@ -55,23 +60,23 @@ def run_network(device):
 
     collate_fn = partial(util.collate_batch, tokenizer=tokenizer_)
 
-    train_loader = DataLoader(split_train_, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
-    valid_loader = DataLoader(split_valid_, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
-    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
+    train_loader = DataLoader(split_train_, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
+    valid_loader = DataLoader(split_valid_, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
+    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
 
     # check how the encoder/decoder works on a single input after encoding and batching
     print("=" * 40)
     for labels, batch in train_loader:
-        print('Example of decoding encoded text with bert toknizer:')
+        print('Example of decoding encoded text with bert tokenizer:')
         pprint(tokenizer.decode(batch['input_ids'][0]))
         print("=" * 40)
         break
 
-    model = network.bert_models.Model(num_labels=num_labels)
+    model = network.bert_models.Model(num_labels=num_labels, bert_type=bert_type, bert_variation=bert_variation)
     model.to(device)
 
-    optim = AdamW(model.parameters(), lr=5e-5)
-    epochs = 2
+    optim = AdamW(model.parameters(), lr=learning_rate)
+
     total_steps = len(train_loader) * epochs
     scheduler = get_linear_schedule_with_warmup(optimizer=optim
                                                 , num_warmup_steps=0
