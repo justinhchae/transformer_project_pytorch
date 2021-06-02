@@ -57,6 +57,7 @@ def run_network(device):
 
     train_loader = DataLoader(split_train_, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
     valid_loader = DataLoader(split_valid_, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
+    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
 
     # check how the encoder/decoder works on a single input after encoding and batching
     print("=" * 40)
@@ -154,7 +155,7 @@ def run_network(device):
             total_eval_loss = 0
             nb_eval_steps = 0
 
-            for labels, encoded_batch in valid_loader:
+            for labels, encoded_batch in test_loader:
 
                 input_ids = encoded_batch['input_ids'].to(device)
                 attention_mask = encoded_batch['attention_mask'].to(device)
@@ -176,27 +177,27 @@ def run_network(device):
                 total_eval_accuracy += flat_accuracy(logits, labels)
 
                 # Report the final accuracy for this validation run.
-                avg_val_accuracy = total_eval_accuracy / len(valid_loader)
-                print("  Accuracy: {0:.2f}".format(avg_val_accuracy))
+                avg_test_accuracy = total_eval_accuracy / len(test_loader)
+                print("  Accuracy: {0:.2f}".format(avg_test_accuracy))
 
                 # Calculate the average loss over all of the batches.
-                avg_val_loss = total_eval_loss / len(valid_loader)
+                avg_test_loss = total_eval_loss / len(test_loader)
 
                 # Measure how long the validation run took.
                 validation_time = format_time(time.time() - t0)
 
-                print("  Validation Loss: {0:.2f}".format(avg_val_loss))
-                print("  Validation took: {:}".format(validation_time))
+                print("  Test Loss: {0:.2f}".format(avg_test_loss))
+                print("  Test took: {:}".format(validation_time))
 
                 # Record all statistics from this epoch.
                 training_stats.append(
                     {
                         'epoch': epoch_i + 1,
                         'Training Loss': ave_train_loss,
-                        'Valid. Loss': avg_val_loss,
-                        'Valid. Accur.': avg_val_accuracy,
+                        'Test. Loss': avg_test_loss,
+                        'TEst. Accur.': avg_test_accuracy,
                         'Training Time': training_time,
-                        'Validation Time': validation_time
+                        'Test Time': validation_time
                     }
                 )
 
