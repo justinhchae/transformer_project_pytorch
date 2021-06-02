@@ -7,6 +7,9 @@ from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.dataset import random_split
 from torchtext.datasets.ag_news import AG_NEWS
 from torchtext.datasets.dbpedia import DBpedia
+from torchtext.datasets.imdb import IMDB
+from torchtext.datasets.amazonreviewpolarity import AmazonReviewPolarity
+from torchtext.datasets.yelpreviewpolarity import YelpReviewPolarity
 from functools import partial
 from pprint import pprint
 
@@ -20,6 +23,12 @@ def get_torch_corpora(torch_corpora_name):
         train_iter, test_iter = AG_NEWS(root=corpora_path)
     elif "dbpedia" in torch_corpora_name:
         train_iter, test_iter = DBpedia(root=corpora_path)
+    elif "imdb" in torch_corpora_name:
+        train_iter, test_iter = IMDB(root=corpora_path)
+    elif "amazon_review" in torch_corpora_name:
+        train_iter, test_iter = AmazonReviewPolarity(root=corpora_path)
+    elif "yelp_review" in torch_corpora_name:
+        train_iter, test_iter = YelpReviewPolarity(root=corpora_path)
     else:
         return None, None
 
