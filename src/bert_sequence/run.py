@@ -36,7 +36,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
     tokenizer = utils.make_tokenizer(bert_name, bert_case_type)
 
     data = utils.data.get_corpora(torch_corpora_name=torch_corpora_name, tokenizer=tokenizer, batch_size=batch_size
-                                  , shuffle_dataloader=shuffle_dataloader)
+                                  , shuffle_dataloader=shuffle_dataloader, tensor_type=tensor_type)
 
     train_loader = data['train_loader']
     test_loader = data['test_loader']
