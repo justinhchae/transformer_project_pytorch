@@ -1,4 +1,3 @@
-
 from src import utils, bert_sequence
 from src.bert_sequence.train_epoch import train_epoch
 from src.bert_sequence.test_epoch import test_epoch
@@ -15,7 +14,7 @@ import random
 import progressbar
 
 
-def network(device, use_seed=False):
+def network(device, use_seed=False, torch_corpora_name="ag_news"):
     if use_seed:
         random.seed(utils.constants.SEED_VAL)
         np.random.seed(utils.constants.SEED_VAL)
@@ -40,10 +39,16 @@ def network(device, use_seed=False):
     # freeze partial function signature
     tokenizer_ = partial(tokenizer, padding=True, truncation=True, add_special_tokens=True, return_tensors=tensor_type)
     # make data loader objects and apply tokenizer
-    data = utils.data.get_corpora(tokenizer=tokenizer_, batch_size=batch_size, shuffle_dataloader=shuffle_dataloader)
+    data = utils.data.get_corpora(torch_corpora_name=torch_corpora_name, tokenizer=tokenizer_, batch_size=batch_size
+                                  , shuffle_dataloader=shuffle_dataloader)
 
     train_loader = data['train_loader']
     test_loader = data['test_loader']
+    if "valid_loader" in data.keys():
+        valid_loader = data['valid_loader']
+    else:
+        valid_loader = None
+
     num_labels = data['num_labels']
 
     # check how the encoder/decoder works on a single input after encoding and batching
@@ -76,17 +81,25 @@ def network(device, use_seed=False):
         for epoch_i in range(0, epochs):
             t0 = time.time()
             avg_train_loss, curr_step = train_epoch(model, train_loader, optim, progress, scheduler, curr_step, device
-                                         , break_test=do_break_testing)
+                                                    , break_test=do_break_testing)
             print("")
             print("=" * 20, f"Epoch: {epoch_i}", "=" * 20)
             print("  Average training loss: {0:.2f}".format(avg_train_loss))
-            avg_test_accuracy = test_epoch(model, test_loader, device
-                                       , break_test=do_break_testing)
-
-            print("")
-            print("  Accuracy: {0:.2f}".format(avg_test_accuracy))
+            avg_test_accuracy, avg_test_loss = test_epoch(model, test_loader, device, break_test=do_break_testing)
+            print("  Test Loss: {0:.2f}".format(avg_test_loss))
+            print("  Test Accuracy: {0:.2f}".format(avg_test_accuracy))
             print("=" * 20)
+            epoch_time = utils.train_helpers.format_time(time.time() - t0)
 
+            training_stats.append(
+                {
+                    'epoch': epoch_i + 1,
+                    'Training Loss': avg_train_loss,
+                    'Test. Loss': avg_test_loss,
+                    'TEst. Accur.': avg_test_accuracy,
+                    'Epoch Time': epoch_time,
+                }
+            )
 
         # TODO:Clean up training structures and metrics
         #

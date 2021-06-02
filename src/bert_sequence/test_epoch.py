@@ -37,5 +37,6 @@ def test_epoch(model, data_loader, device, break_test=False):
 
     # Report the final accuracy for this test run.
     avg_test_accuracy = total_test_accuracy / len(data_loader)
+    avg_test_loss = total_test_loss / len(data_loader)
 
-    return avg_test_accuracy
+    return avg_test_accuracy, avg_test_loss

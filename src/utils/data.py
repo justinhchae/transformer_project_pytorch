@@ -6,16 +6,29 @@ import pandas as pd
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.dataset import random_split
 from torchtext.datasets.ag_news import AG_NEWS
+from torchtext.datasets.dbpedia import DBpedia
 from functools import partial
 from pprint import pprint
 
 pd.set_option('display.max_columns', None)
 
 
-def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=False):
+def get_torch_corpora(torch_corpora_name):
+    corpora_path = os.sep.join([utils.constants.DATA_PATH, torch_corpora_name])
+
+    if "ag_news" in torch_corpora_name:
+        train_iter, test_iter = AG_NEWS(root=corpora_path)
+    elif "dbpedia" in torch_corpora_name:
+        train_iter, test_iter = DBpedia(root=corpora_path)
+    else:
+        return None, None
+
+    return train_iter, test_iter
+
+
+def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=False, torch_corpora_name="ag_news"):
     # use a simple, pre-canned dataset for multi-class text classification
-    ag_news_path = os.sep.join([utils.constants.DATA_PATH, 'ag_news'])
-    train_iter, test_iter = AG_NEWS(root=ag_news_path)
+    train_iter, test_iter = get_torch_corpora(torch_corpora_name=torch_corpora_name)
     train_data, test_data = list(train_iter), list(test_iter)
 
     # for batching, apply collate function with tokenizer in data loader objects
