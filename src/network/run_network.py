@@ -142,7 +142,7 @@ def run_network(device):
             print("  Training epcoh took: {:}".format(training_time))
 
             print("")
-            print("Running Validation...")
+            print("Running Test Set...")
 
             t0 = time.time()
 
