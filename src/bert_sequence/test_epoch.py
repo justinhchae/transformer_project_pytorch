@@ -32,7 +32,7 @@ def test_epoch(model, data_loader, device, break_test=False):
         total_test_accuracy += utils.train_helpers.flat_accuracy(logits, labels)
 
         if break_test:
-            if counter == 3:
+            if counter == 2:
                 break
 
     # Report the final accuracy for this test run.

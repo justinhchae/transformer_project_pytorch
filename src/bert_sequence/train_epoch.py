@@ -31,7 +31,7 @@ def train_epoch(model, data_loader, optimizer, progress, scheduler, curr_step, d
         curr_step += 1
 
         if break_test:
-            if counter == 3:
+            if counter == 2:
                 break
 
     avg_train_loss = total_train_loss / len(data_loader)
