@@ -43,7 +43,7 @@ python3 main.py
   ```bash
   conda activate transformer_project
   ```
-* Install all dependencies with pip
+* Alternatively, install all dependencies with pip (only required if building from scratch)
   ```bash
   pip3 install --no-cache-dir huggingface huggingface_hub transformers jiant torch torchvision torchaudio progressbar2 tqdm boto3 requests regex sentencepiece sacremoses pandas scikit-learn matplotlib
   ```
