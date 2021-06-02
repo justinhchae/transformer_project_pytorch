@@ -97,6 +97,8 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
                     'Test Loss': avg_test_loss,
                     'Test Accuracy': avg_test_accuracy,
                     'Epoch Time': epoch_time,
+                    'Number of Classes': num_labels,
+
                 }
             )
 

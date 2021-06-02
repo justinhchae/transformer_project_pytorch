@@ -71,15 +71,25 @@ def make_tokenizer(bert_name, bert_case_type, path='huggingface/pytorch-transfor
     return tokenizer
 
 
+def label_pipeline(sentiment_map, x):
+    if isinstance(x, str):
+        x_prime = sentiment_map[x]
+    else:
+        x_prime = x
+
+    return x_prime - 1
+
 def collate_batch(batch, tokenizer):
     labels = []
     batch_texts = []
+    sentiment_map = {"pos": 1,
+                     "neg": 0}
 
     # https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
-    label_pipeline = lambda x: int(x) - 1
+    # label_pipeline = lambda x: int(x) - 1
 
     for (_label, batch_text) in batch:
-        labels.append(label_pipeline(_label))
+        labels.append(label_pipeline(sentiment_map, _label))
         batch_texts.append(batch_text)
 
     labels = torch.tensor(labels, dtype=torch.long)
