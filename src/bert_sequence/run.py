@@ -101,76 +101,8 @@ def network(device, use_seed=False, torch_corpora_name="ag_news"):
                 }
             )
 
-        # TODO:Clean up training structures and metrics
-        #
-        #     training_time = utils.train_helpers.format_time(time.time() - t0)
-        #
-        #     print("")
-        #     print("  Average training loss: {0:.2f}".format(ave_train_loss))
-        #     print("  Training epcoh took: {:}".format(training_time))
-        #
-        #     print("")
-        #     print("Running Test Set...")
-        #
-        #     t0 = time.time()
-        #
-        #     # Put the model in evaluation mode--the dropout layers behave differently
-        #     # during evaluation.
-        #     model.eval()
-        #
-        #     # Tracking variables
-        #     total_eval_accuracy = 0
-        #     total_eval_loss = 0
-        #     nb_eval_steps = 0
-        #
-        #     for labels, encoded_batch in test_loader:
-        #
-        #         input_ids = encoded_batch['input_ids'].to(device)
-        #         attention_mask = encoded_batch['attention_mask'].to(device)
-        #         token_type_ids = encoded_batch['token_type_ids'].to(device)
-        #         labels = labels.to(device)
-        #
-        #         with torch.no_grad():
-        #             output = model(input_ids=input_ids
-        #                             , attention_mask=attention_mask
-        #                             , token_type_ids=token_type_ids
-        #                             , labels=labels
-        #                             )
-        #         loss = output.loss
-        #         total_train_loss += loss.item()
-        #
-        #         logits = output.logits.detach().cpu().numpy()
-        #         labels = labels.to('cpu').numpy()
-        #
-        #         total_eval_accuracy += utils.train_helpers.flat_accuracy(logits, labels)
-        #
-        #     # Report the final accuracy for this validation run.
-        #     avg_test_accuracy = total_eval_accuracy / len(test_loader)
-        #     print("  Accuracy: {0:.2f}".format(avg_test_accuracy))
-        #
-        #     # Calculate the average loss over all of the batches.
-        #     avg_test_loss = total_eval_loss / len(test_loader)
-        #
-        #     # Measure how long the validation run took.
-        #     validation_time = utils.train_helpers.format_time(time.time() - t0)
-        #
-        #     print("  Test Loss: {0:.2f}".format(avg_test_loss))
-        #     print("  Test took: {:}".format(validation_time))
-        #
-        #     # Record all statistics from this epoch.
-        #     training_stats.append(
-        #         {
-        #             'epoch': epoch_i + 1,
-        #             'Training Loss': ave_train_loss,
-        #             'Test. Loss': avg_test_loss,
-        #             'TEst. Accur.': avg_test_accuracy,
-        #             'Training Time': training_time,
-        #             'Test Time': validation_time
-        #         }
-        #     )
-        #
-        # print("")
-        # print("Training complete!")
-        #
-        # print("Total training took {:} (h:mm:ss)".format(utils.train_helpers.format_time(time.time() - total_t0)))
-        # pprint(training_stats)
+    print("")
+    print("Training complete!")
+
+    print("Total training took {:} (h:mm:ss)".format(utils.train_helpers.format_time(time.time() - total_t0)))
+    pprint(training_stats)
