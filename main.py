@@ -15,7 +15,7 @@ if __name__ == '__main__':
     results = []
     # run the network for the bert sequence classification model
     for torch_corpora_name in torch_corpora_names:
-        result = bert_sequence.run.network(device, torch_corpora_name=torch_corpora_name)
+        result = bert_sequence.run.network(device, torch_corpora_name=torch_corpora_name, do_break_testing=True)
         results.append(result)
 
     pprint(results)

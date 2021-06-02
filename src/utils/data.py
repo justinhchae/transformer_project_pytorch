@@ -79,8 +79,8 @@ def collate_batch(batch, tokenizer):
     return labels, encoded_batch
 
 
-def demo_encoder_decoder(data_loader, tokenizer):
-    print("=" * 40)
+def demo_encoder_decoder(data_loader, tokenizer, torch_corpora_name):
+    print("=" * 20, f"Corpora Name: {torch_corpora_name}")
     for labels, batch in data_loader:
         print('Example of decoding encoded text with bert tokenizer:')
         pprint(tokenizer.decode(batch['input_ids'][0]))

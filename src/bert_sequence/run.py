@@ -14,7 +14,7 @@ import random
 import progressbar
 
 
-def network(device, use_seed=False, torch_corpora_name="ag_news"):
+def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testing=False):
     if use_seed:
         random.seed(utils.constants.SEED_VAL)
         np.random.seed(utils.constants.SEED_VAL)
@@ -31,8 +31,6 @@ def network(device, use_seed=False, torch_corpora_name="ag_news"):
     shuffle_dataloader = True
     epochs = 3
     learning_rate = 5e-5
-    # set tdo_break_testing o true to run a single train loop in each epoch for debugging
-    do_break_testing = False
 
     # make a tokenizer from HF library
     tokenizer = utils.make_tokenizer(bert_name, bert_case_type)
@@ -52,7 +50,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news"):
     num_labels = data['num_labels']
 
     # check how the encoder/decoder works on a single input after encoding and batching
-    utils.data.demo_encoder_decoder(train_loader, tokenizer)
+    utils.data.demo_encoder_decoder(train_loader, tokenizer, torch_corpora_name=torch_corpora_name)
 
     model = bert_sequence.model.Model(num_labels=num_labels, bert_type=bert_type, bert_variation=bert_variation)
     model.to(device)
@@ -74,7 +72,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news"):
     curr_step = 0
     total_t0 = time.time()
 
-    print("=" * 10, 'Starting Training\n')
+    print("=" * 10, f'Starting Training for {torch_corpora_name}', "=" * 10, "\n")
 
     with progressbar.ProgressBar(max_value=total_steps) as progress:
 
