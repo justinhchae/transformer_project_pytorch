@@ -6,7 +6,7 @@ import os
 
 # sets global path to torch.hub cache (for download and recall)
 torch.hub.set_dir(utils.constants.CACHE_PATH)
-
+os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
 if __name__ == '__main__':
     # run config scripts to make folders and things
