@@ -99,7 +99,7 @@ python3 main.py
   ```
   
   
-  ## Citations
+  ## Works Cited
   
   @article{neeraj2020bertlayers,
     title = "Feature-based Approach with BERT",
