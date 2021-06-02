@@ -49,7 +49,7 @@ def run_network(device):
     train_data, test_data = list(train_iter), list(test_iter)
 
     num_labels = len(set([label for (label, text) in train_data]))
-    num_train = int(len(train_data) * 0.8)
+    num_train = int(len(train_data) * 0.95)
 
     split_train_, split_valid_ = random_split(train_data, [num_train, len(train_data) - num_train])
 
@@ -71,7 +71,7 @@ def run_network(device):
     model.to(device)
 
     optim = AdamW(model.parameters(), lr=5e-5)
-    epochs = 1
+    epochs = 2
     total_steps = len(train_loader) * epochs
     scheduler = get_linear_schedule_with_warmup(optimizer=optim
                                                 , num_warmup_steps=0
