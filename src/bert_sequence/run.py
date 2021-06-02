@@ -95,13 +95,16 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
 
             training_stats.append(
                 {
-                    'corpora': torch_corpora_name,
-                    'epoch': epoch_i + 1,
+                    'Corpora': torch_corpora_name,
+                    'Epoch': epoch_i + 1,
                     'Training Loss': avg_train_loss,
                     'Test Loss': avg_test_loss,
                     'Test Accuracy': avg_test_accuracy,
                     'Epoch Time': epoch_time,
                     'Number of Classes': num_labels,
+                    'Batch Size': batch_size,
+                    'Bert Model': bert_variation,
+                    'Bert Type': bert_type,
 
                 }
             )
