@@ -35,7 +35,7 @@ python3 main.py
   # ensures a predictable selection of dependency management
   conda config --set channel_priority strict
   ```
-* A new conda environment with python 3.7; seems to be required
+* A new conda environment with python 3.7; seems to be required to support jiant environment
   ```bash
   conda create -n transformer_project python=3.7
   ```
