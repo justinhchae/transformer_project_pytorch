@@ -56,12 +56,13 @@ def run_network(device):
     num_labels = len(set([label for (label, text) in train_data]))
     num_train = int(len(train_data) * 0.95)
 
-    split_train_, split_valid_ = random_split(train_data, [num_train, len(train_data) - num_train])
+    # split_train_, split_valid_ = random_split(train_data, [num_train, len(train_data) - num_train])
 
     collate_fn = partial(util.collate_batch, tokenizer=tokenizer_)
 
-    train_loader = DataLoader(split_train_, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
-    valid_loader = DataLoader(split_valid_, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
+    # train_loader = DataLoader(split_train_, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
+    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
+    # valid_loader = DataLoader(split_valid_, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
     test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
 
     # check how the encoder/decoder works on a single input after encoding and batching
