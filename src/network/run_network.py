@@ -36,7 +36,7 @@ def run_network(device):
     batch_size = 16
     tensor_type = "pt"
     shuffle_dataloader = True
-    epochs = 2
+    epochs = 3
     learning_rate = 5e-5
 
     # make a tokenizer from HF library
