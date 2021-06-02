@@ -16,9 +16,10 @@ if __name__ == '__main__':
     # run the network for the bert sequence classification model
     for torch_corpora_name in torch_corpora_names:
         # do_break_testing: if true, runs 3 cycles in each epoch and cuts training short for debugging
-        result = bert_sequence.run.network(device, torch_corpora_name=torch_corpora_name, do_break_testing=True)
+        result = bert_sequence.run.network(device, torch_corpora_name=torch_corpora_name, do_break_testing=False)
         results.append(result)
 
+    # TODO: Read into dataframe and graph results
     pprint(results)
 
     # uncomment below to run the jiant validator script
