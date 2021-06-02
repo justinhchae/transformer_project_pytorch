@@ -1,4 +1,4 @@
-from src.util import constants
+from src.utils import constants
 
 import os
 import torch

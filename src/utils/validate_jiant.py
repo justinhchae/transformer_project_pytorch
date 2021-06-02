@@ -1,4 +1,4 @@
-from src import util
+from src import utils
 
 from jiant.proj.simple import runscript as run
 import jiant.scripts.download_data.runscript as downloader
@@ -8,7 +8,7 @@ def validate_jiant():
     # validation scripts
     # https://github.com/nyu-mll/jiant
 
-    EXP_DIR = util.constants.DATA_PATH
+    EXP_DIR = utils.constants.DATA_PATH
 
     # Download the Data
     downloader.download_data(["mrpc"], f"{EXP_DIR}/tasks")
