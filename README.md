@@ -10,7 +10,7 @@
   conda env create --file environment.yml -n transformer_project
   ```
 ## Get Started
-* Test environment configuration and set up with jiant validation script:
+* Run a full pipeline of text classification scripts with bert and corpora through pytorch:
 ```bash
 python3 main.py
 ```
