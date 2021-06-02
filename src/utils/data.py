@@ -84,8 +84,8 @@ def label_pipeline(sentiment_map, x):
 def collate_batch(batch, tokenizer):
     labels = []
     batch_texts = []
-    sentiment_map = {"pos": 1,
-                     "neg": 0}
+    sentiment_map = {"pos": 2,
+                     "neg": 1}
 
     # https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
     # label_pipeline = lambda x: int(x) - 1

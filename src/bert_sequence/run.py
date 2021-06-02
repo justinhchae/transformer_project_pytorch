@@ -52,7 +52,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
     # check how the encoder/decoder works on a single input after encoding and batching
     utils.data.demo_encoder_decoder(train_loader, tokenizer, torch_corpora_name=torch_corpora_name)
     # see what the labels are
-    print("=" * 20, f'The Labels for {torch_corpora_name} are {data["labels_list"]}')
+    print("=" * 40, f'The Labels for {torch_corpora_name} are {data["labels_list"]}')
 
     model = bert_sequence.model.Model(num_labels=num_labels, bert_type=bert_type, bert_variation=bert_variation)
     model.to(device)
@@ -80,11 +80,13 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
 
         for epoch_i in range(0, epochs):
             t0 = time.time()
+            # run the train loop
             avg_train_loss, curr_step = train_epoch(model, train_loader, optim, progress, scheduler, curr_step, device
                                                     , break_test=do_break_testing)
             print("")
             print("=" * 20, f"Epoch: {epoch_i} | Corpora: {torch_corpora_name}", "=" * 20)
             print("  Average training loss: {0:.2f}".format(avg_train_loss))
+            # run the test loop
             avg_test_accuracy, avg_test_loss = test_epoch(model, test_loader, device, break_test=do_break_testing)
             print("  Test Loss: {0:.2f}".format(avg_test_loss))
             print("  Test Accuracy: {0:.2f}".format(avg_test_accuracy))
