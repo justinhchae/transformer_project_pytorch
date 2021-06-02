@@ -56,6 +56,7 @@ def run_network(device):
     collate_fn = partial(util.collate_batch, tokenizer=tokenizer_)
 
     train_loader = DataLoader(split_train_, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
+    valid_loader = DataLoader(split_valid_, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
 
     # check how the encoder/decoder works on a single input after encoding and batching
     print("=" * 40)
@@ -69,7 +70,7 @@ def run_network(device):
     model.to(device)
 
     optim = AdamW(model.parameters(), lr=5e-5)
-    epochs = 2
+    epochs = 1
     total_steps = len(train_loader) * epochs
     scheduler = get_linear_schedule_with_warmup(optimizer=optim
                                                 , num_warmup_steps=0
@@ -95,6 +96,8 @@ def run_network(device):
     # validation accuracy, and timings.
     training_stats = []
     curr_step = 0
+    total_t0 = time.time()
+
     print("=" * 10, 'Starting Training\n')
 
     with progressbar.ProgressBar(max_value=total_steps) as progress:
@@ -136,3 +139,70 @@ def run_network(device):
             print("")
             print("  Average training loss: {0:.2f}".format(ave_train_loss))
             print("  Training epcoh took: {:}".format(training_time))
+
+            print("")
+            print("Running Validation...")
+
+            t0 = time.time()
+
+            # Put the model in evaluation mode--the dropout layers behave differently
+            # during evaluation.
+            model.eval()
+
+            # Tracking variables
+            total_eval_accuracy = 0
+            total_eval_loss = 0
+            nb_eval_steps = 0
+
+            for labels, encoded_batch in valid_loader:
+
+                input_ids = encoded_batch['input_ids'].to(device)
+                attention_mask = encoded_batch['attention_mask'].to(device)
+                token_type_ids = encoded_batch['token_type_ids'].to(device)
+                labels = labels.to(device)
+
+                with torch.no_grad():
+                    output = model(input_ids=input_ids
+                                    , attention_mask=attention_mask
+                                    , token_type_ids=token_type_ids
+                                    , labels=labels
+                                    )
+                loss = output.loss
+                total_train_loss += loss.item()
+
+                logits = output.logits.detach().cpu().numpy()
+                labels = labels.to('cpu').numpy()
+
+                total_eval_accuracy += flat_accuracy(logits, labels)
+
+                # Report the final accuracy for this validation run.
+                avg_val_accuracy = total_eval_accuracy / len(validation_dataloader)
+                print("  Accuracy: {0:.2f}".format(avg_val_accuracy))
+
+                # Calculate the average loss over all of the batches.
+                avg_val_loss = total_eval_loss / len(validation_dataloader)
+
+                # Measure how long the validation run took.
+                validation_time = format_time(time.time() - t0)
+
+                print("  Validation Loss: {0:.2f}".format(avg_val_loss))
+                print("  Validation took: {:}".format(validation_time))
+
+                # Record all statistics from this epoch.
+                training_stats.append(
+                    {
+                        'epoch': epoch_i + 1,
+                        'Training Loss': ave_train_loss,
+                        'Valid. Loss': avg_val_loss,
+                        'Valid. Accur.': avg_val_accuracy,
+                        'Training Time': training_time,
+                        'Validation Time': validation_time
+                    }
+                )
+
+            print("")
+            print("Training complete!")
+
+            print("Total training took {:} (h:mm:ss)".format(format_time(time.time() - total_t0)))
+
+
