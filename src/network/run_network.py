@@ -176,11 +176,11 @@ def run_network(device):
                 total_eval_accuracy += flat_accuracy(logits, labels)
 
                 # Report the final accuracy for this validation run.
-                avg_val_accuracy = total_eval_accuracy / len(validation_dataloader)
+                avg_val_accuracy = total_eval_accuracy / len(valid_loader)
                 print("  Accuracy: {0:.2f}".format(avg_val_accuracy))
 
                 # Calculate the average loss over all of the batches.
-                avg_val_loss = total_eval_loss / len(validation_dataloader)
+                avg_val_loss = total_eval_loss / len(valid_loader)
 
                 # Measure how long the validation run took.
                 validation_time = format_time(time.time() - t0)
