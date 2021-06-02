@@ -51,6 +51,8 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
 
     # check how the encoder/decoder works on a single input after encoding and batching
     utils.data.demo_encoder_decoder(train_loader, tokenizer, torch_corpora_name=torch_corpora_name)
+    # see what the labels are
+    print("=" * 10, f'The Labels for {torch_corpora_name} are: {data["labels_list"]}')
 
     model = bert_sequence.model.Model(num_labels=num_labels, bert_type=bert_type, bert_variation=bert_variation)
     model.to(device)
