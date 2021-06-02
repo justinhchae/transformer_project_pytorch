@@ -24,8 +24,6 @@ def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=Fals
     # count number of labels to pass to classification model
     num_labels = len(set([label for (label, text) in train_data]))
 
-    valid_loader = None
-
     if split_train_data:
         # count training/validation split from a single train set
         num_train = int(len(train_data) * 0.95)
@@ -34,6 +32,7 @@ def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=Fals
         valid_loader = DataLoader(split_valid_, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
     else:
         train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
+        valid_loader = None
 
     test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=shuffle_dataloader, collate_fn=collate_fn)
 
