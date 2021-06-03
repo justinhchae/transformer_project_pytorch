@@ -14,7 +14,7 @@ import random
 import progressbar
 
 
-def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testing=False):
+def network(device, use_seed=False, torch_corpora_name="ag_news", show_demo_decode=False, do_break_testing=False):
     if use_seed:
         random.seed(utils.constants.SEED_VAL)
         np.random.seed(utils.constants.SEED_VAL)
@@ -49,7 +49,9 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
     num_labels = data['num_labels']
 
     # check how the encoder/decoder works on a single input after encoding and batching
-    utils.data.demo_encoder_decoder(train_loader, tokenizer, torch_corpora_name=torch_corpora_name)
+    if show_demo_decode:
+        utils.data.demo_encoder_decoder(train_loader, tokenizer, torch_corpora_name=torch_corpora_name)
+        
     # see what the labels are
     print("=" * 40, f'The Labels for {torch_corpora_name} are {data["labels_list"]}')
 
