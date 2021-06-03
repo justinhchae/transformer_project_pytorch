@@ -1,5 +1,5 @@
 import torch
-from transformers import BertConfig
+from transformers import BertForSequenceClassification
 
 
 class Model(torch.nn.Module):
@@ -7,20 +7,15 @@ class Model(torch.nn.Module):
                  , num_labels=2
                  , activation="gelu"
                  , bert_type="bert-base-uncased"
-                 , bert_variation="modelForSequenceClassification"):
+                 ):
         super().__init__()
-        config = BertConfig.from_pretrained(bert_type
-                                            , output_hidden_states=True
-                                            , num_labels=num_labels
-                                            , hidden_act=activation)
+        self.bert = BertForSequenceClassification.from_pretrained(bert_type
+                                                                  , output_hidden_states=True
+                                                                  , num_labels=num_labels
+                                                                  , hidden_act=activation)
 
-        self.bert = torch.hub.load('huggingface/pytorch-transformers'
-                                   , bert_variation
-                                   , bert_type
-                                   , config=config)
-
-        config = self.bert.config
-        self.hidden_size = config.hidden_size
+        self.hidden_size = self.bert.config.hidden_size
+        # use if going with a regression scheme
         self.fc = torch.nn.Linear(self.hidden_size, 1)
 
     def get_CLS_embeddings(self, layer):

@@ -53,7 +53,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", do_break_testi
     # see what the labels are
     print("=" * 40, f'The Labels for {torch_corpora_name} are {data["labels_list"]}')
 
-    model = bert_sequence.model.Model(num_labels=num_labels, bert_type=bert_type, bert_variation=bert_variation)
+    model = bert_sequence.model.Model(num_labels=num_labels, bert_type=bert_type)
     model.to(device)
 
     optim = AdamW(model.parameters(), lr=learning_rate)
