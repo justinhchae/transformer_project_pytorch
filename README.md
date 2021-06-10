@@ -35,9 +35,9 @@ python3 main.py
   # ensures a predictable selection of dependency management
   conda config --set channel_priority strict
   ```
-* A new conda environment with python 3.7; seems to be required to support jiant environment
+* A new conda environment with python 3.9
   ```bash
-  conda create -n transformer_project python=3.7
+  conda create -n transformer_project python=3.9
   ```
 * Activate Conda Environment:
   ```bash
@@ -45,7 +45,7 @@ python3 main.py
   ```
 * Alternatively, install all dependencies with pip (only required if building from scratch)
   ```bash
-  pip3 install --no-cache-dir huggingface huggingface_hub transformers jiant torch torchvision torchaudio progressbar2 tqdm boto3 requests regex sentencepiece sacremoses pandas scikit-learn matplotlib
+  pip3 install --no-cache-dir huggingface huggingface_hub transformers torch torchvision torchaudio torchtext progressbar2 tqdm boto3 requests regex sentencepiece sacremoses importlib_metadata pandas scikit-learn matplotlib seaborn
   ```
 * Not Required if using previous pip installs - PyTorch conda install with Conda per [the docs](https://pytorch.org/get-started/locally/#start-locally)
   ```bash

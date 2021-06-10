@@ -5,4 +5,3 @@ DATA_PATH = os.path.join(WORKFLOW_ROOT, 'data')
 CACHE_PATH = os.path.join(WORKFLOW_ROOT, 'cache')
 FIG_PATH = os.path.join(WORKFLOW_ROOT, 'figures')
 MODEL_PATH = os.path.join(WORKFLOW_ROOT, 'models')
-SEED_VAL = 42

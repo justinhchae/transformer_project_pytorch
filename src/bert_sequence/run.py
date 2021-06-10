@@ -51,7 +51,7 @@ def network(device, use_seed=False, torch_corpora_name="ag_news", show_demo_deco
     # check how the encoder/decoder works on a single input after encoding and batching
     if show_demo_decode:
         utils.data.demo_encoder_decoder(train_loader, tokenizer, torch_corpora_name=torch_corpora_name)
-        
+
     # see what the labels are
     print("=" * 40, f'The Labels for {torch_corpora_name} are {data["labels_list"]}')
 

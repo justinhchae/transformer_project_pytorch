@@ -1,19 +1,22 @@
 from src import utils, bert_sequence
+from src.utils import constants
 import torch
-from pprint import pprint
 import pandas as pd
 import os
 
-# sets global path to torch.hub cache (for download and recall)
-torch.hub.set_dir(utils.constants.CACHE_PATH)
+# force all caching to a local cache folder
+os.environ["PYTORCH_TRANSFORMERS_CACHE"] = constants.CACHE_PATH
+os.environ["TRANSFORMERS_CACHE"] = constants.CACHE_PATH
+torch.hub.set_dir(constants.CACHE_PATH)
+# take care of a warning with tokenizers
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
 if __name__ == '__main__':
     # run config scripts to make folders and things
     device = utils.config.run()
 
-    torch_corpora_names = ['ag_news', 'dbpedia', 'imdb', 'amazon_polarity', 'yelp_review', 'yelp_review', 'sogou_news'
-        , 'yahoo_answers']
+    torch_corpora_names = ['ag_news']\
+        # , 'dbpedia', 'imdb', 'amazon_polarity', 'yelp_review', 'yelp_review', 'sogou_news', 'yahoo_answers']
 
     results = []
     # run the network for the bert sequence classification model
@@ -28,7 +31,3 @@ if __name__ == '__main__':
     print(df)
     results_filepath = os.sep.join([utils.constants.DATA_PATH, 'results.csv'])
     df.to_csv(results_filepath, index=False)
-
-    # uncomment below to run the jiant validator script
-    # util.validate_jiant()
-
