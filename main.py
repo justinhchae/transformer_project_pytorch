@@ -23,7 +23,7 @@ if __name__ == '__main__':
         torch.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
 
-    torch_corpora_names = ['yahoo_answers', 'dbpedia', 'ag_news', 'imdb', 'yelp_polarity', 'sogou_news', ]
+    torch_corpora_names = ['yahoo_answers', 'dbpedia', 'ag_news', 'imdb', 'yelp_polarity', 'sogou_news']
 
     results = []
     # run the network for the bert sequence classification model

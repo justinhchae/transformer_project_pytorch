@@ -28,7 +28,7 @@ def fit(torch_corpora_name
         , batch_size=16
         , shuffle_data_loader=True
         , tensor_type="pt"
-        , tokenizer_max_len=100
+        , tokenizer_max_len=256
         , tokenizer_kws=None
         , loss_function_type="mse_loss"
         , pre_trained_str="roberta-base"):
