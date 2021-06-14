@@ -21,7 +21,7 @@ import copy
 
 def fit(torch_corpora_name
         , do_break_testing=False
-        , epochs=6
+        , epochs=2
         , learning_rate=1e-5
         , warmup_steps=100
         , device=None
