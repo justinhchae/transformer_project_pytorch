@@ -118,6 +118,6 @@ def fit(torch_corpora_name
     pprint(training_stats)
     print("=" * 40, "\n")
 
-    model_save = utils.data.save_model(model, f"{torch_corpora_name}_{pre_trained_str}")
-    print(f"Saving model state dict to {model_save}")
+    # model_save = utils.data.save_model(model, f"{torch_corpora_name}_{pre_trained_str}")
+    # print(f"Saving model state dict to {model_save}")
     return training_stats
