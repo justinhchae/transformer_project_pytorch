@@ -44,8 +44,13 @@ def get_torch_corpora(torch_corpora_name):
     return train_iter, test_iter
 
 
-def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=False, torch_corpora_name="ag_news"
-                , tensor_type="pt"):
+def get_corpora(tokenizer
+                , batch_size=8
+                , shuffle_dataloader=True
+                , split_train_data=False
+                , torch_corpora_name="ag_news"
+                , tensor_type="pt"
+                ):
     # use a simple, pre-canned dataset for multi-class text classification
     train_iter, test_iter = get_torch_corpora(torch_corpora_name=torch_corpora_name)
     train_data, test_data = list(train_iter), list(test_iter)
@@ -55,7 +60,7 @@ def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=Fals
     # make data loader objects and apply tokenizer
 
     # for batching, apply collate function with tokenizer in data loader objects
-    collate_fn = partial(utils.collate_batch, tokenizer=tokenizer)
+    collate_fn = partial(utils.collate_fn, tokenizer=tokenizer)
 
     # count number of labels to pass to classification model
     labels_list = set([label for (label, text) in train_data])
@@ -81,12 +86,8 @@ def get_corpora(tokenizer, batch_size, shuffle_dataloader, split_train_data=Fals
     return data
 
 
-def make_tokenizer(bert_name, bert_case_type, path='huggingface/pytorch-transformers'):
-    tokenizer = torch.hub.load(path, 'tokenizer', f'{bert_name}-base-{bert_case_type}')
-    return tokenizer
-
-
-def label_pipeline(sentiment_map, x):
+def label_pipeline(x):
+    sentiment_map = {"pos": 2, "neg": 1}
     if isinstance(x, str):
         x_prime = sentiment_map[x]
     else:
@@ -95,17 +96,13 @@ def label_pipeline(sentiment_map, x):
     return x_prime - 1
 
 
-def collate_batch(batch, tokenizer):
+def collate_fn(batch, tokenizer):
+    # https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
     labels = []
     batch_texts = []
-    sentiment_map = {"pos": 2,
-                     "neg": 1}
-
-    # https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
-    # label_pipeline = lambda x: int(x) - 1
 
     for (_label, batch_text) in batch:
-        labels.append(label_pipeline(sentiment_map, _label))
+        labels.append(label_pipeline(_label))
         batch_texts.append(batch_text)
 
     labels = torch.tensor(labels, dtype=torch.long)
@@ -125,9 +122,8 @@ def demo_encoder_decoder(data_loader, tokenizer, torch_corpora_name):
 
 def save_model(model, filename='my_torch_model'):
     # Reference: https://pytorch.org/tutorials/beginner/saving_loading_models.html
-    filename = f'{filename}.pt' if ".pt" not in filename else filename
 
-    filepath = os.sep.join([utils.constants.MODEL_PATH, filename])
+    filepath = os.path.join(utils.constants.MODEL_PATH, filename)
 
-    torch.save(model.state_dict(), filepath)
+    model.save_pretrained(filepath)
     return filepath

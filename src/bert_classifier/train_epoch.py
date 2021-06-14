@@ -13,11 +13,12 @@ def train_epoch(model, data_loader, optimizer, progress, scheduler, curr_step, d
     for counter, (labels, encoded_batch) in enumerate(data_loader):
         input_ids = encoded_batch['input_ids'].to(device)
         attention_mask = encoded_batch['attention_mask'].to(device)
-        token_type_ids = encoded_batch['token_type_ids'].to(device)
-        labels = labels.to(device)
+        # token_type_ids = encoded_batch['token_type_ids'].to(device)
+        labels = labels.unsqueeze(1).to(device)
 
         model.zero_grad()
-        output = model(input_ids, attention_mask, token_type_ids, labels)
+
+        output = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
 
         loss = output.loss
         total_train_loss += loss.item()

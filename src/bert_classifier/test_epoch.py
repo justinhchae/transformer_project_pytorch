@@ -18,11 +18,11 @@ def test_epoch(model, data_loader, device, break_test=False):
 
         input_ids = encoded_batch['input_ids'].to(device)
         attention_mask = encoded_batch['attention_mask'].to(device)
-        token_type_ids = encoded_batch['token_type_ids'].to(device)
+        # token_type_ids = encoded_batch['token_type_ids'].to(device)
         labels = labels.to(device)
 
         with torch.no_grad():
-            output = model(input_ids, attention_mask, token_type_ids, labels)
+            output = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
         loss = output.loss
         total_test_loss += loss.item()
 
