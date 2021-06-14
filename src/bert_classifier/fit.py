@@ -21,11 +21,11 @@ import copy
 
 def fit(torch_corpora_name
         , do_break_testing=False
-        , epochs=2
+        , epochs=1
         , learning_rate=1e-5
         , warmup_steps=100
         , device=None
-        , batch_size=8
+        , batch_size=16
         , shuffle_data_loader=True
         , tensor_type="pt"
         , tokenizer_max_len=100
