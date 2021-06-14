@@ -28,7 +28,7 @@ if __name__ == '__main__':
     results = []
     # run the network for the bert sequence classification model
     for torch_corpora_name in torch_corpora_names:
-        bert_classifier.fit(torch_corpora_name=torch_corpora_name, device=device, do_break_testing=True)
+        bert_classifier.fit(torch_corpora_name=torch_corpora_name, device=device, do_break_testing=False)
         # results.append(result)
 
     print("=" * 20, "Final Total Experiment Summary", "=" * 20)
