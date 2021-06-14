@@ -15,6 +15,8 @@ class Model(torch.nn.Module):
                                                                      , output_hidden_states=True
                                                                      , num_labels=num_labels
                                                                      )
+        self.config = self.bert.config
+        self.save_pretrained = self.bert.save_pretrained
 
 
     def forward(self, input_ids, attention_mask, labels):
