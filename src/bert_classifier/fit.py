@@ -47,6 +47,7 @@ def fit(torch_corpora_name
     data = utils.get_corpora(tokenizer=tokenizer, torch_corpora_name=torch_corpora_name)
 
     model = bert_classifier.Model(num_labels=data['num_labels'])
+    model.to(device)
 
     optim = AdamW(model.parameters(), lr=learning_rate)
 
